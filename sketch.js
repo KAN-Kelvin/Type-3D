@@ -1,6 +1,6 @@
 let columns = 10;
 let rows = 10;
-
+let testo = "<@@@>";
 //
 
 let font;
@@ -8,7 +8,7 @@ let font;
 function preload() {
   font = loadFont("./assets/InputMonoCondensed-Light.ttf");
 }
-
+let cam;
 //
 
 function setup() {
@@ -17,20 +17,23 @@ function setup() {
 
   textFont(font);
   textSize(height / 10);
+  cam = createCamera();
+  cam.setPosition(1400, -350, 700);
+  cam.lookAt(100, -400, 200);
 }
 
 //
 
 function draw() {
-  background("blue");
+  background("BLACK");
   orbitControl();
 
   let angle = 360 / columns;
   let diameter = textSize();
 
-  fill("white");
+  fill("red");
 
-  rotateY(-frameCount);
+  rotateY(frameCount);
   for (let i = 0; i < columns; i++) {
     push();
     rotateY(angle * i);
@@ -38,9 +41,10 @@ function draw() {
     for (let j = 0; j < rows; j++) {
       const a = cos(frameCount * 5 + j * 20);
       const m = map(a, -1, 1, 0, textSize());
+
       push();
       translate(m, textSize() * (j - rows / 2), 0);
-      text("Ciao", 0, 0);
+      text(testo, 0, 0);
       pop();
     }
     pop();
